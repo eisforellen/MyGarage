@@ -17,7 +17,7 @@
 @property (strong, nonatomic) NSString *model;
 @property int mileage;
 @property int lastServiceMileage;
-
+@property NSDate *lastServiceDate;
 
 -(id)initVehicleWithNickname:(NSString *)nickname make:(NSString *)make model:(NSString *)model mileage:(int)miles;
 
