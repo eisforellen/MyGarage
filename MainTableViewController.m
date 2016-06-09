@@ -8,6 +8,7 @@
 
 #import "MainTableViewController.h"
 #import "Vehicle.h"
+#import "UpdateViewController.h"
 
 @interface MainTableViewController ()
 
@@ -22,11 +23,8 @@
     
     
     Vehicle *car1 = [[Vehicle alloc]initVehicleWithNickname:@"Red Car" make:@"Ford" model:@"Mustang" mileage:10000];
-    //_vehicleArray = [[NSMutableArray alloc] init];
-  //  _vehicleArray = @[car1];
     _vehicleArray = @[car1].mutableCopy;
-    
-       // self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonClicked:)];
+
     
     [super viewDidLoad];
     
@@ -34,14 +32,8 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
-
-
-//- (void)addButtonClicked:(id)sender{
-//    NSLog(@"button pressed");
-//    [self performSegueWithIdentifier:@"toAddVC" sender:sender];
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -62,38 +54,37 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
-    // Configure the cell...
-    
+
     cell.textLabel.text= [[_vehicleArray objectAtIndex:indexPath.row] nickname];
-    
-//    Vehicle *car1 = [_vehicleArray objectAtIndex:indexPath.row];
-//    
-//    cell.textLabel.text = car1.nickname;
+    // refactor to include Make and Modle concatenated
    cell.detailTextLabel.text = [[_vehicleArray objectAtIndex:indexPath.row] make];
     
     return cell;
 }
 
 
-/*
-// Override to support conditional editing of the table view.
+
+ //Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // This deletes the cell, issue with cell count causes crash
+        //[tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_vehicleArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        // This removes object from Array
+        [_vehicleArray removeObjectAtIndex:indexPath.row];
+        [tableView reloadData];
+    } //else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+   // }
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.
@@ -122,10 +113,20 @@
         AddViewController *vc = [segue destinationViewController];
         NSLog(@"prepare for segue action");
     }
+    else if([[segue identifier] isEqualToString:@"updateSegueIdentifier"]) {
+        UpdateViewController *vc = [segue destinationViewController];
+        NSLog(@"segue for update view");
+        
+        vc.updatedVehicle = [[Vehicle alloc]init];
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        
+        vc.updatedVehicle = [self.vehicleArray objectAtIndex:indexPath.row];
+    }
     
 }
 
 -(IBAction)unwindForSegue:(UIStoryboardSegue *)unwindSegue{
+    if([[unwindSegue identifier] isEqualToString:@"unwindAddVC"]){
     AddViewController *addVC = [unwindSegue sourceViewController];
     
     
@@ -134,6 +135,7 @@
     addVC.vehicle.make = addVC.makeInput.text;
     addVC.vehicle.model = addVC.modelInput.text;
     addVC.vehicle.mileage = [addVC.mileageInput.text intValue];
+    addVC.vehicle.lastServiceMileage = [addVC.mileageInput.text intValue];
   
     _addedVehicle = [[Vehicle alloc]init];
     _addedVehicle = addVC.vehicle;
@@ -141,6 +143,14 @@
     [self.vehicleArray addObject:_addedVehicle];
     NSLog(@"New vehicle list: %@", _vehicleArray.description);
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.vehicleArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+    else if([[unwindSegue identifier] isEqualToString:@"unwindUpdateVC"]) {
+        UpdateViewController *vc = [unwindSegue sourceViewController];
+        NSLog(@"segue for update view");
+    }
+
+        
 }
 
 

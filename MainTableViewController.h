@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AddViewController.h"
-@interface MainTableViewController : UITableViewController
+@interface MainTableViewController : UITableViewController <UITableViewDataSource>
 
 @property (strong, nonatomic) Vehicle *addedVehicle;
 

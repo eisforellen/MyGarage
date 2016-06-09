@@ -18,6 +18,7 @@
         _make = make;
         _model = model;
         _mileage = miles;
+        _lastServiceMileage = miles;
     }
     return self;
 }

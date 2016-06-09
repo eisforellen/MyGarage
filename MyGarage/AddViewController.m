@@ -29,6 +29,7 @@
     _vehicle.make = _makeInput.text;
     _vehicle.model = _modelInput.text;
     _vehicle.mileage = [_mileageInput.text intValue];
+    _vehicle.lastServiceMileage = [_mileageInput.text intValue];
     
     
     NSLog(@"Nickname= %@", _vehicle.nickname);

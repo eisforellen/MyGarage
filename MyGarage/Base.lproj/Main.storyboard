@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Main Table View Controller-->
+        <!--My Garage-->
         <scene sceneID="Xji-9a-gl0">
             <objects>
-                <tableViewController id="ZbE-sx-oFc" customClass="MainTableViewController" sceneMemberID="viewController">
+                <tableViewController title="My Garage" id="ZbE-sx-oFc" customClass="MainTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="tGj-Wn-kUN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,6 +37,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="h4B-6e-NQQ" kind="push" identifier="updateSegueIdentifier" id="3jQ-E4-iPQ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -55,6 +58,128 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3qu-O6-CqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="607" y="401"/>
+        </scene>
+        <!--Update View Controller-->
+        <scene sceneID="TaT-uv-P8M">
+            <objects>
+                <viewController id="h4B-6e-NQQ" customClass="UpdateViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CEj-30-5AT"/>
+                        <viewControllerLayoutGuide type="bottom" id="em5-3Q-TZv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3qt-Wu-F6S">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nickname:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bc-fg-NJE">
+                                <rect key="frame" x="78" y="107" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NicknameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNu-fV-6J8">
+                                <rect key="frame" x="167" y="107" width="133" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Make:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NU6-3u-VGO">
+                                <rect key="frame" x="113" y="136" width="46" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Make Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gbE-qZ-jyR">
+                                <rect key="frame" x="167" y="136" width="134" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Model:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76c-lG-0Fy">
+                                <rect key="frame" x="106" y="165" width="53" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ModelLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m61-zA-7L2">
+                                <rect key="frame" x="167" y="165" width="127" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current mileage:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0p-qt-OYZ">
+                                <rect key="frame" x="32" y="194" width="127" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Mileage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgZ-1Q-3Df">
+                                <rect key="frame" x="167" y="194" width="134" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Miles till next service:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4P-Tv-EeI">
+                                <rect key="frame" x="-5" y="223" width="164" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rem. mileage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKs-Sn-Cvq">
+                                <rect key="frame" x="167" y="223" width="103" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aB3-lv-U4O">
+                                <rect key="frame" x="134" y="301" width="142" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="serviceCompleteButtonClicked:" destination="h4B-6e-NQQ" eventType="editingDidEnd" id="Q4x-XE-st4"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Mileage:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQ6-oR-l9o">
+                                <rect key="frame" x="19" y="305" width="104" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5El-5Z-vjr">
+                                <rect key="frame" x="99" y="389" width="139" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.70017011330000001" blue="0.75673076920000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Service Complete">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="serviceCompleteButtonClicked:" destination="h4B-6e-NQQ" eventType="touchUpInside" id="PfT-fn-cWB"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CZN-v0-Akg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="adh-hr-Qg5">
+                            <connections>
+                                <action selector="saveNewMileageButtonClicked:" destination="h4B-6e-NQQ" id="5RR-DK-mjI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="currentMileageLabel" destination="cgZ-1Q-3Df" id="jEh-dS-Bf3"/>
+                        <outlet property="makeLabel" destination="gbE-qZ-jyR" id="FWz-ix-2iX"/>
+                        <outlet property="modelLabel" destination="m61-zA-7L2" id="q7n-IE-Dcf"/>
+                        <outlet property="nicknameLabel" destination="VNu-fV-6J8" id="S3U-1x-hUh"/>
+                        <outlet property="remainingMileageLabel" destination="dKs-Sn-Cvq" id="NDi-Yl-lAG"/>
+                        <outlet property="serviceCompleteButton" destination="5El-5Z-vjr" id="Ph0-rE-uBO"/>
+                        <outlet property="updatedMileageInput" destination="aB3-lv-U4O" id="F9r-uA-XRj"/>
+                        <segue destination="dtm-eh-eLX" kind="unwind" identifier="unwindUpdateVC" unwindAction="unwindForSegue:" id="HBW-l1-zva"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z9B-42-7tv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="dtm-eh-eLX" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1115" y="748"/>
         </scene>
         <!--Add View Controller-->
         <scene sceneID="BFk-bk-5pS">
@@ -119,7 +244,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="fIP-iu-ue2">
                             <connections>
                                 <action selector="saveButtonClicked:" destination="0q3-vs-WfN" id="ScE-53-maX"/>
-                                <segue destination="5Ct-1r-zsi" kind="unwind" unwindAction="unwindForSegue:" id="FKd-K6-jBm"/>
+                                <segue destination="5Ct-1r-zsi" kind="unwind" identifier="unwindAddVC" unwindAction="unwindForSegue:" id="FKd-K6-jBm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -133,7 +258,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jea-et-lta" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="5Ct-1r-zsi" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1062" y="401"/>
+            <point key="canvasLocation" x="1112" y="111"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wFa-Q3-RNf">
