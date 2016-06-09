@@ -40,6 +40,7 @@
     _modelLabel.text = _updatedVehicle.model;
     _currentMileageLabel.text = [NSString stringWithFormat:@"%i", _updatedVehicle.mileage];
     _remainingMileageLabel.text = [NSString stringWithFormat:@"%i", [self remainingMileageCalc]];
+    _lastServicedDateLabel.text = [NSString stringWithFormat:@"%@", _updatedVehicle.lastServiceDate];
     NSLog(@"Mileage: %i  lastServiceMileage: %i", _updatedVehicle.mileage, _updatedVehicle.lastServiceMileage);
     
     [self serviceButtonStatus];
@@ -50,7 +51,8 @@
 
 - (IBAction)saveNewMileageButtonClicked:(id)sender {
     // Add update current mileage logic
-    _updatedVehicle.mileage = [_updatedMileageInput.text intValue];
+    [self updateDataMileage:[_updatedMileageInput.text intValue]];
+   // _updatedVehicle.mileage = [_updatedMileageInput.text intValue];
     NSLog(@"Updated mileage: %i", _updatedVehicle.mileage);
     [self setupUpdateVC];
     [self serviceButtonStatus];
@@ -80,16 +82,22 @@
     // Add service complete logic - needs if statement
     NSLog(@"Updated");
     if(_updatedMileageInput){
-        _updatedVehicle.lastServiceMileage = [_updatedMileageInput.text intValue];
-        _updatedVehicle.mileage = [_updatedMileageInput.text intValue];
+        [self updateDataLastServiceMileage:[_updatedMileageInput.text intValue]];
+        [self updateDataMileage:[_updatedMileageInput.text intValue]];
+//        _updatedVehicle.lastServiceMileage = [_updatedMileageInput.text intValue];
+//        _updatedVehicle.mileage = [_updatedMileageInput.text intValue];
     } else {
-    _updatedVehicle.lastServiceMileage = _updatedVehicle.mileage;
+    [self updateDataLastServiceMileage:_updatedVehicle.mileage];
+        //_updatedVehicle.lastServiceMileage = _updatedVehicle.mileage;
     }
      //[self alertForService];
     _serviceCompleteButton.enabled=NO;
     _serviceCompleteButton.alpha = 0.2;
     _remainingMileageLabel.textColor = [UIColor blackColor];
+    [self daysCalc];
+    [self checkDaysSinceService];
     [self setupUpdateVC];
+    
     
 }
 
@@ -134,6 +142,30 @@
     
 }
 
+-(void)updateDataLastServiceMileage:(int)miles{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    _updatedVehicle.lastServiceMileage = miles;
+    [realm commitWriteTransaction];
+    //[_mTableView reloadData];
+}
+
+-(void)updateDataMileage:(int)miles{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    _updatedVehicle.mileage = miles;
+    [realm commitWriteTransaction];
+    //[_mTableView reloadData];
+}
+
+-(void)updateDataDate:(NSDate *)date{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    _updatedVehicle.lastServiceDate = date;
+    [realm commitWriteTransaction];
+    //[_mTableView reloadData];
+}
+
 // Calculate days between two dates
 //NSString *start = @"2010-09-01";
 //NSString *end = @"2010-12-01";
@@ -149,6 +181,32 @@
 //                                                    fromDate:startDate
 //                                                      toDate:endDate
 //                                                     options:NSCalendarWrapComponents];
+
+ 
+ 
+ -(NSInteger)daysCalc{
+     NSDate *start = _updatedVehicle.lastServiceDate;
+     NSDate *now =  [NSDate date];
+ 
+     [self updateDataDate:now];
+ 
+ NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+ NSDateComponents *components = [gregorianCalendar components:NSCalendarUnitDay
+ fromDate:start
+ toDate:now
+ options:NSCalendarWrapComponents];
+ NSLog(@"%ld", (long)[components day]);
+     return [components day];
+ 
+ }
+
+-(void)checkDaysSinceService{
+   NSInteger *days= [self daysCalc];
+    if(days >180){
+        NSLog(@"Alert");
+    }
+}
+
 /*
 #pragma mark - Navigation
 

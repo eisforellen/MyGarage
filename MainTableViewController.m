@@ -11,12 +11,9 @@
 #import "UpdateViewController.h"
 
 @interface MainTableViewController ()
-//{
-//    RLMResults *vehicleArray;
-//    //PeopleInformationTable *selectedDataObject;
-//}
 
-@property NSMutableArray *vehicleArray;
+
+//@property NSMutableArray *vehicleArray;
 
 @end
 
@@ -26,11 +23,12 @@
 - (void)viewDidLoad {
     
     
-    Vehicle *car1 = [[Vehicle alloc]initVehicleWithNickname:@"Red Car" make:@"Ford" model:@"Mustang" mileage:10000];
-    _vehicleArray = @[car1].mutableCopy;
-
+  //  Vehicle *car1 = [[Vehicle alloc]initVehicleWithNickname:@"Red Car" make:@"Ford" model:@"Mustang" mileage:10000 ];
+   // vehicleArray = @[car1].mutableCopy;
+    vehicleArray = [Vehicle allObjects];
     
     [super viewDidLoad];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -44,6 +42,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)insertDataIntoDataBaseWithName:(NSString *)name make:(NSString *)make model:(NSString *)model mileage:(int)miles date:(NSDate *)date{
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    Vehicle *information = [[Vehicle alloc] init];
+    information.nickname = name;
+    information.make = make;
+    information.model = model;
+    information.mileage = miles;
+    information.lastServiceMileage = miles;
+    information.lastServiceDate = date;
+    [realm addObject:information];
+    [realm commitWriteTransaction];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -51,7 +63,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _vehicleArray.count;
+    return vehicleArray.count;
 }
 
 
@@ -59,9 +71,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
 
-    cell.textLabel.text= [[_vehicleArray objectAtIndex:indexPath.row] nickname];
+    cell.textLabel.text= [[vehicleArray objectAtIndex:indexPath.row] nickname];
     // refactor to include Make and Modle concatenated
-   cell.detailTextLabel.text = [[_vehicleArray objectAtIndex:indexPath.row] make];
+  // cell.detailTextLabel.text = [[vehicleArray objectAtIndex:indexPath.row] make];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ / %@", [[vehicleArray objectAtIndex:indexPath.row] make], [[vehicleArray objectAtIndex:indexPath.row] model]];
     
     return cell;
 }
@@ -79,11 +92,17 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // This deletes the cell, issue with cell count causes crash
-        //[tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_vehicleArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+      
         // This removes object from Array
-        [_vehicleArray removeObjectAtIndex:indexPath.row];
+        [[RLMRealm defaultRealm] beginWriteTransaction];
+        [[RLMRealm defaultRealm]deleteObject:[vehicleArray objectAtIndex:indexPath.row]];
+        [[RLMRealm defaultRealm] commitWriteTransaction];
+        vehicleArray = [Vehicle allObjects];
         [tableView reloadData];
+        // This would add animations
+//        [tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//        [tableView setEditing:NO animated:YES];
+        
     } //else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
    // }
@@ -124,7 +143,7 @@
         vc.updatedVehicle = [[Vehicle alloc]init];
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
-        vc.updatedVehicle = [self.vehicleArray objectAtIndex:indexPath.row];
+        vc.updatedVehicle = [vehicleArray objectAtIndex:indexPath.row];
     }
     
 }
@@ -133,6 +152,8 @@
     if([[unwindSegue identifier] isEqualToString:@"unwindAddVC"]){
     AddViewController *addVC = [unwindSegue sourceViewController];
     
+    NSDate *now =  [NSDate date];
+    addVC.initialDate = now;
     
     addVC.vehicle = [[Vehicle alloc]init];
     addVC.vehicle.nickname = addVC.nicknameInput.text;
@@ -140,13 +161,18 @@
     addVC.vehicle.model = addVC.modelInput.text;
     addVC.vehicle.mileage = [addVC.mileageInput.text intValue];
     addVC.vehicle.lastServiceMileage = [addVC.mileageInput.text intValue];
+    addVC.vehicle.lastServiceDate = addVC.initialDate;
   
     _addedVehicle = [[Vehicle alloc]init];
     _addedVehicle = addVC.vehicle;
     NSLog(@"%@", _addedVehicle.nickname);
-    [self.vehicleArray addObject:_addedVehicle];
-    NSLog(@"New vehicle list: %@", _vehicleArray.description);
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.vehicleArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+       
+    // add new vehicle to realm database
+    [self insertDataIntoDataBaseWithName:_addedVehicle.nickname make:_addedVehicle.make model:_addedVehicle.model mileage:_addedVehicle.mileage date:_addedVehicle.lastServiceDate];
+        
+    //[self.vehicleArray addObject:_addedVehicle];
+   //NSLog(@"New vehicle list: %@", vehicleArray.description);
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:vehicleArray.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     
     else if([[unwindSegue identifier] isEqualToString:@"unwindUpdateVC"]) {

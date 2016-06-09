@@ -17,5 +17,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *updatedMileageInput;
 @property (strong, nonatomic) IBOutlet UIButton *serviceCompleteButton;
 @property (strong, nonatomic) Vehicle *updatedVehicle;
+@property (strong, nonatomic) IBOutlet UILabel *lastServicedDateLabel;
+
 
 @end

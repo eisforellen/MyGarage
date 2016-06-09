@@ -14,4 +14,5 @@
 @property (strong, nonatomic) IBOutlet UITextField *modelInput;
 @property (strong, nonatomic) IBOutlet UITextField *mileageInput;
 @property (strong, nonatomic) Vehicle *vehicle;
+@property (strong, nonatomic) NSDate *initialDate;
 @end
