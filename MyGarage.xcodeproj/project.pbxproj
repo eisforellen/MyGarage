@@ -17,7 +17,24 @@
 		42F383531D089D4800BE448D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 42F383521D089D4800BE448D /* .gitignore */; };
 		42F383561D08A0EB00BE448D /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F383551D08A0EB00BE448D /* AddViewController.m */; };
 		42F383591D09A25C00BE448D /* UpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F383581D09A25C00BE448D /* UpdateViewController.m */; };
+		42F3835B1D09E95C00BE448D /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F3835A1D09E95C00BE448D /* Realm.framework */; };
+		42F3835C1D09E95C00BE448D /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F3835A1D09E95C00BE448D /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		42F383601D09EE7C00BE448D /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F3835F1D09EE7C00BE448D /* libc++.1.tbd */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		42F3835D1D09E95C00BE448D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				42F3835C1D09E95C00BE448D /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		42F383311D08989500BE448D /* MyGarage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGarage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,6 +54,8 @@
 		42F383551D08A0EB00BE448D /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddViewController.m; path = MyGarage/AddViewController.m; sourceTree = "<group>"; };
 		42F383571D09A25C00BE448D /* UpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UpdateViewController.h; path = MyGarage/UpdateViewController.h; sourceTree = "<group>"; };
 		42F383581D09A25C00BE448D /* UpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpdateViewController.m; path = MyGarage/UpdateViewController.m; sourceTree = "<group>"; };
+		42F3835A1D09E95C00BE448D /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		42F3835F1D09EE7C00BE448D /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42F383601D09EE7C00BE448D /* libc++.1.tbd in Frameworks */,
+				42F3835B1D09E95C00BE448D /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +74,8 @@
 		42F383281D08989500BE448D = {
 			isa = PBXGroup;
 			children = (
+				42F3835F1D09EE7C00BE448D /* libc++.1.tbd */,
+				42F3835A1D09E95C00BE448D /* Realm.framework */,
 				42F3834E1D08990200BE448D /* Controllers */,
 				42F383331D08989500BE448D /* MyGarage */,
 				42F383321D08989500BE448D /* Products */,
@@ -115,6 +138,8 @@
 				42F3832D1D08989500BE448D /* Sources */,
 				42F3832E1D08989500BE448D /* Frameworks */,
 				42F3832F1D08989500BE448D /* Resources */,
+				42F3835D1D09E95C00BE448D /* Embed Frameworks */,
+				42F3835E1D09E9A200BE448D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -170,6 +195,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		42F3835E1D09E9A200BE448D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework/strip-frameworks.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		42F3832D1D08989500BE448D /* Sources */ = {
@@ -293,6 +334,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MyGarage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.detroitlabs.MyGarage;
@@ -304,6 +349,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MyGarage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.detroitlabs.MyGarage;

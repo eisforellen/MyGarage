@@ -11,6 +11,10 @@
 #import "UpdateViewController.h"
 
 @interface MainTableViewController ()
+//{
+//    RLMResults *vehicleArray;
+//    //PeopleInformationTable *selectedDataObject;
+//}
 
 @property NSMutableArray *vehicleArray;
 
