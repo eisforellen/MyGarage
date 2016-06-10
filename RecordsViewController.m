@@ -18,7 +18,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     _recordsHeaderLabel.text = [NSString stringWithFormat:@"%@ Records", _vehicle.nickname];
-    _pastServicesLabel.text = [NSString stringWithFormat:@"Date of Last Service: %@ \nMileage at Last Service: %i \n", _vehicle.lastServiceDate, _vehicle.lastServiceMileage];
+    _pastServicesLabel.text = [NSString stringWithFormat:@"%@", _vehicle.lastServiceDate];
+     _milesAtLastServiceLabel.text = [NSString stringWithFormat:@"%d miles", _vehicle.lastServiceMileage];
 }
 
 - (void)didReceiveMemoryWarning {
