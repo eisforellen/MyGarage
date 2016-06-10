@@ -79,15 +79,11 @@
     return cell;
 }
 
-
-
  //Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-
-
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,9 +99,9 @@
 //        [tableView deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 //        [tableView setEditing:NO animated:YES];
         
-    } //else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-   // }
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+         //Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
 }
 
 
@@ -128,15 +124,14 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if([[segue identifier] isEqualToString:@"toAddVC"]){
-        
-        AddViewController *vc = [segue destinationViewController];
-        NSLog(@"prepare for segue action");
-    }
-    else if([[segue identifier] isEqualToString:@"updateSegueIdentifier"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    
+
+    }else if([[segue identifier] isEqualToString:@"updateSegueIdentifier"]) {
         UpdateViewController *vc = [segue destinationViewController];
         NSLog(@"segue for update view");
         
@@ -144,6 +139,14 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
         vc.updatedVehicle = [vehicleArray objectAtIndex:indexPath.row];
+    }else if ([[segue identifier] isEqualToString:@"detailToRecordsSegue"]){
+        // Gets the info from the cell that was clicked
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+
+        AddViewController *vc = [segue destinationViewController];
+        
+        
+        NSLog(@"Segue from Acc for cell %@", [[vehicleArray objectAtIndex:indexPath.row]nickname]);
     }
     
 }

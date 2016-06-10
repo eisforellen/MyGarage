@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "AddViewController.h"
+#import "RecordsViewController.h"
+
 @interface MainTableViewController : UITableViewController <UITableViewDataSource>
 {
     RLMResults *vehicleArray;

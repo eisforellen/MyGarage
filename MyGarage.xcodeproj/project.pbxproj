@@ -20,6 +20,7 @@
 		42F3835B1D09E95C00BE448D /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F3835A1D09E95C00BE448D /* Realm.framework */; };
 		42F3835C1D09E95C00BE448D /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 42F3835A1D09E95C00BE448D /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42F383601D09EE7C00BE448D /* libc++.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F3835F1D09EE7C00BE448D /* libc++.1.tbd */; };
+		42F383891D0B3FF200BE448D /* RecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42F383881D0B3FF200BE448D /* RecordsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,6 +57,8 @@
 		42F383581D09A25C00BE448D /* UpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UpdateViewController.m; path = MyGarage/UpdateViewController.m; sourceTree = "<group>"; };
 		42F3835A1D09E95C00BE448D /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		42F3835F1D09EE7C00BE448D /* libc++.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.1.tbd"; path = "usr/lib/libc++.1.tbd"; sourceTree = SDKROOT; };
+		42F383871D0B3FF200BE448D /* RecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordsViewController.h; sourceTree = "<group>"; };
+		42F383881D0B3FF200BE448D /* RecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				42F383551D08A0EB00BE448D /* AddViewController.m */,
 				42F3834B1D0898F800BE448D /* MainTableViewController.h */,
 				42F3834C1D0898F800BE448D /* MainTableViewController.m */,
+				42F383871D0B3FF200BE448D /* RecordsViewController.h */,
+				42F383881D0B3FF200BE448D /* RecordsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 			files = (
 				42F383561D08A0EB00BE448D /* AddViewController.m in Sources */,
 				42F383511D08994900BE448D /* Vehicle.m in Sources */,
+				42F383891D0B3FF200BE448D /* RecordsViewController.m in Sources */,
 				42F383391D08989500BE448D /* AppDelegate.m in Sources */,
 				42F383361D08989500BE448D /* main.m in Sources */,
 				42F3834D1D0898F800BE448D /* MainTableViewController.m in Sources */,
