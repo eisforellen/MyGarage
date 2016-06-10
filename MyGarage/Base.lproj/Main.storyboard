@@ -173,6 +173,12 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Reminder: Your vehicle is due for service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZK-Px-EIH">
+                                <rect key="frame" x="19" y="454" width="278" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -189,6 +195,7 @@
                         <outlet property="makeLabel" destination="gbE-qZ-jyR" id="FWz-ix-2iX"/>
                         <outlet property="modelLabel" destination="m61-zA-7L2" id="q7n-IE-Dcf"/>
                         <outlet property="nicknameLabel" destination="VNu-fV-6J8" id="S3U-1x-hUh"/>
+                        <outlet property="notificationLabel" destination="fZK-Px-EIH" id="NPx-2d-IHO"/>
                         <outlet property="regexMessageLabel" destination="i2s-V7-1xn" id="sRR-4O-fmc"/>
                         <outlet property="remainingMileageLabel" destination="dKs-Sn-Cvq" id="NDi-Yl-lAG"/>
                         <outlet property="serviceCompleteButton" destination="5El-5Z-vjr" id="Ph0-rE-uBO"/>
