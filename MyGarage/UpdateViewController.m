@@ -237,7 +237,6 @@
     if(days <1){
         NSLog(@"Alert");
         [self alertForService];
-        _remainingMileageLabel.textColor = [UIColor blueColor];
         _serviceCompleteButton.enabled=YES;
         _serviceCompleteButton.alpha = 1.0;
         _notificationLabel.hidden =false;
