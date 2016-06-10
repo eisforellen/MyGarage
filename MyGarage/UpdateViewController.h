@@ -18,6 +18,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *serviceCompleteButton;
 @property (strong, nonatomic) Vehicle *updatedVehicle;
 @property (strong, nonatomic) IBOutlet UILabel *lastServicedDateLabel;
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
+//@property (weak, nonatomic) IBOutlet UILabel *regexMessageLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *regexMessageLabel;
 
 @end

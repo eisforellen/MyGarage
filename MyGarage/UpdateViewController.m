@@ -35,6 +35,7 @@
 
 -(void)setupUpdateVC{
     
+    _regexMessageLabel.hidden=true;
     _nicknameLabel.text = _updatedVehicle.nickname;
     _makeLabel.text = _updatedVehicle.make;
     _modelLabel.text = _updatedVehicle.model;
@@ -49,15 +50,42 @@
 
 
 
+
 - (IBAction)saveNewMileageButtonClicked:(id)sender {
     // Add update current mileage logic
-    [self updateDataMileage:[_updatedMileageInput.text intValue]];
-   // _updatedVehicle.mileage = [_updatedMileageInput.text intValue];
-    NSLog(@"Updated mileage: %i", _updatedVehicle.mileage);
-    [self setupUpdateVC];
-    [self serviceButtonStatus];
+    [self validateInput];
+    //    [self updateDataMileage:[_updatedMileageInput.text intValue]];
+    //    NSLog(@"Updated mileage: %i", _updatedVehicle.mileage);
+    //    [self setupUpdateVC];
+    //    [self serviceButtonStatus];
+    
     
 }
+
+-(void)validateInput{
+    NSString *pattern = @"^[0-9]*$";
+    NSString *string = _updatedMileageInput.text;
+    NSError *error = nil;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:&error];
+    
+    NSRange textRange = NSMakeRange(0, string.length);
+    NSInteger numberOfMatches = [regex numberOfMatchesInString:string options:0 range:textRange];
+    if(numberOfMatches == 0){
+        NSLog(@" Not Valid");
+        _regexMessageLabel.hidden=false;
+        _updatedMileageInput.layer.borderColor=[[UIColor redColor]CGColor];
+        _updatedMileageInput.layer.borderWidth=1.0;
+    }
+    else{
+        NSLog(@"Valid");
+        _regexMessageLabel.hidden=true;
+        _updatedMileageInput.layer.borderColor=[[UIColor clearColor] CGColor];
+        [self updateDataMileage:[_updatedMileageInput.text intValue]];
+        [self setupUpdateVC];
+        [self serviceButtonStatus];
+    };
+}
+
 
 -(int)remainingMileageCalc{
     int remainingMileage = 5000 - (_updatedVehicle.mileage - _updatedVehicle.lastServiceMileage);
