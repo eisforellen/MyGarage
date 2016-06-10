@@ -127,11 +127,11 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if([[segue identifier] isEqualToString:@"toAddVC"]){
+    if([[segue identifier] isEqualToString:@"toAddVC"]){  // Add Vehicle Page
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     
 
-    }else if([[segue identifier] isEqualToString:@"updateSegueIdentifier"]) {
+    }else if([[segue identifier] isEqualToString:@"updateSegueIdentifier"]) { // Update page
         UpdateViewController *vc = [segue destinationViewController];
         NSLog(@"segue for update view");
         
@@ -139,12 +139,13 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
         vc.updatedVehicle = [vehicleArray objectAtIndex:indexPath.row];
-    }else if ([[segue identifier] isEqualToString:@"detailToRecordsSegue"]){
+    }else if ([[segue identifier] isEqualToString:@"detailToRecordsSegue"]){ // Records Page
         // Gets the info from the cell that was clicked
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
 
         AddViewController *vc = [segue destinationViewController];
-        
+        vc.vehicle = [[Vehicle alloc]init];
+        vc.vehicle = [vehicleArray objectAtIndex:indexPath.row];
         
         NSLog(@"Segue from Acc for cell %@", [[vehicleArray objectAtIndex:indexPath.row]nickname]);
     }
