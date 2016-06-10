@@ -22,5 +22,6 @@
 //@property (weak, nonatomic) IBOutlet UILabel *regexMessageLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *regexMessageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *notificationLabel;
 
 @end

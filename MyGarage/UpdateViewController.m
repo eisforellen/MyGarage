@@ -36,13 +36,14 @@
 -(void)setupUpdateVC{
     
     _regexMessageLabel.hidden=true;
+   // _notificationLabel.hidden =true;
     _nicknameLabel.text = _updatedVehicle.nickname;
     _makeLabel.text = _updatedVehicle.make;
     _modelLabel.text = _updatedVehicle.model;
     _currentMileageLabel.text = [NSString stringWithFormat:@"%i", _updatedVehicle.mileage];
     _remainingMileageLabel.text = [NSString stringWithFormat:@"%i", [self remainingMileageCalc]];
     _lastServicedDateLabel.text = [NSString stringWithFormat:@"%@", _updatedVehicle.lastServiceDate];
-    NSLog(@"Mileage: %i  lastServiceMileage: %i", _updatedVehicle.mileage, _updatedVehicle.lastServiceMileage);
+    //NSLog(@"Mileage: %i  lastServiceMileage: %i", _updatedVehicle.mileage, _updatedVehicle.lastServiceMileage);
     
     [self serviceButtonStatus];
 
@@ -71,13 +72,11 @@
     NSRange textRange = NSMakeRange(0, string.length);
     NSInteger numberOfMatches = [regex numberOfMatchesInString:string options:0 range:textRange];
     if(numberOfMatches == 0){
-        NSLog(@" Not Valid");
         _regexMessageLabel.hidden=false;
         _updatedMileageInput.layer.borderColor=[[UIColor redColor]CGColor];
         _updatedMileageInput.layer.borderWidth=1.0;
     }
     else{
-        NSLog(@"Valid");
         _regexMessageLabel.hidden=true;
         _updatedMileageInput.layer.borderColor=[[UIColor clearColor] CGColor];
         [self updateDataMileage:[_updatedMileageInput.text intValue]];
@@ -97,12 +96,14 @@
     if([self remainingMileageCalc] <= 0){
         _serviceCompleteButton.enabled=YES;
         _serviceCompleteButton.alpha = 1.0;
+        _notificationLabel.hidden =false;
        [self alertForService];
         
     }
     else{
         _serviceCompleteButton.enabled=NO;
         _serviceCompleteButton.alpha = 0.2;
+        _notificationLabel.hidden =true;
     }
 }
 
@@ -120,6 +121,7 @@
     }
      //[self alertForService];
     _serviceCompleteButton.enabled=NO;
+    _notificationLabel.hidden =true;
     _serviceCompleteButton.alpha = 0.2;
     _remainingMileageLabel.textColor = [UIColor blackColor];
     [self daysCalc];
@@ -215,6 +217,7 @@
  -(NSInteger)daysCalc{
      NSDate *start = _updatedVehicle.lastServiceDate;
      NSDate *now =  [NSDate date];
+     NSLog(@"now: %@", now);
  
      [self updateDataDate:now];
  
@@ -230,10 +233,31 @@
 
 -(void)checkDaysSinceService{
    NSInteger *days= [self daysCalc];
-    if(days >180){
+    NSLog(@"%d", days);
+    if(days <1){
         NSLog(@"Alert");
+        [self alertForService];
+        _remainingMileageLabel.textColor = [UIColor blueColor];
+        _serviceCompleteButton.enabled=YES;
+        _serviceCompleteButton.alpha = 1.0;
+        _notificationLabel.hidden =false;
+    }
+    else{NSLog(@"what?");
+      //  _notificationLabel.hidden =true;
+        
+        _serviceCompleteButton.enabled=NO;
+        _serviceCompleteButton.alpha = 0.2;
+        _notificationLabel.hidden =true;
+        
     }
 }
+
+
+
+
+
+
+
 
 /*
 #pragma mark - Navigation
