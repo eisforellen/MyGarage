@@ -14,5 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *recordsHeaderLabel;
 @property (strong, nonatomic) Vehicle *vehicle;
 
+@property (strong, nonatomic) IBOutlet UILabel *milesAtLastServiceLabel;
 
 @end
