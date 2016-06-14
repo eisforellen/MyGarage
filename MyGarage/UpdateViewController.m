@@ -97,13 +97,16 @@
         _serviceCompleteButton.enabled=YES;
         _serviceCompleteButton.alpha = 1.0;
         _notificationLabel.hidden =false;
-       [self alertForService];
+         _remainingMileageLabel.textColor = [UIColor redColor];
+      // [self alertForService];
         
     }
     else{
         _serviceCompleteButton.enabled=NO;
         _serviceCompleteButton.alpha = 0.2;
         _notificationLabel.hidden =true;
+        _remainingMileageLabel.textColor = [UIColor blackColor];
+        
     }
 }
 
@@ -119,11 +122,11 @@
     [self updateDataLastServiceMileage:_updatedVehicle.mileage];
         //_updatedVehicle.lastServiceMileage = _updatedVehicle.mileage;
     }
-     //[self alertForService];
     _serviceCompleteButton.enabled=NO;
     _notificationLabel.hidden =true;
     _serviceCompleteButton.alpha = 0.2;
-    _remainingMileageLabel.textColor = [UIColor blackColor];
+   // _remainingMileageLabel.textColor = [UIColor blackColor];
+    NSLog(@"Turn the text black");
     [self daysCalc];
     [self checkDaysSinceService];
     [self setupUpdateVC];
@@ -131,46 +134,7 @@
     
 }
 
-- (void)alertForService {
-  //  NSLog(@"Alert!");
-    
-    
-    _remainingMileageLabel.textColor = [UIColor redColor];
-    
-    
-    
-    
-    
-    
-    //        UIAlertController * alert=   [UIAlertController
-    //                                      alertControllerWithTitle:@"Notification:"
-    //                                      message:@"Time for service!"
-    //                                      preferredStyle:UIAlertControllerStyleAlert];
-    //
-    //        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK"
-    //                                                     style:UIAlertActionStyleDefault
-    //                                                   handler:^(UIAlertAction * action) {
-    //                                                       //Do Some Action
-    //                                                       [alert dismissViewControllerAnimated:YES completion:nil];
-    //                                                   }];
-    //
-    //        [alert addAction:ok];
-    //
-    //        [self presentViewController:alert animated:YES completion:nil];
-    
-    
-    /*second alert code*/
-//    NSString *message=@"Time for service";
-//    NSString *alertTitle=@"Notification Alert!";
-//    NSString *OKText=@"OK";
-//    
-//    UIAlertController *alertView = [UIAlertController alertControllerWithTitle:alertTitle message:message preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:OKText style:UIAlertActionStyleCancel handler:nil];
-//    [alertView addAction:alertAction];
-//    [self presentViewController:alertView animated:YES completion:nil];
-    
-    
-}
+
 
 -(void)updateDataLastServiceMileage:(int)miles{
     RLMRealm *realm = [RLMRealm defaultRealm];
@@ -236,12 +200,13 @@
     NSLog(@"%d", days);
     if(days <1){
         NSLog(@"Alert");
-        [self alertForService];
+        _remainingMileageLabel.textColor = [UIColor redColor];
         _serviceCompleteButton.enabled=YES;
         _serviceCompleteButton.alpha = 1.0;
         _notificationLabel.hidden =false;
     }
-    else{NSLog(@"what?");
+    else{
+        NSLog(@"what?");
       //  _notificationLabel.hidden =true;
         
         _serviceCompleteButton.enabled=NO;
